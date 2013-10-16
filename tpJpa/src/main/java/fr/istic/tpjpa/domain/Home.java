@@ -1,14 +1,15 @@
 package fr.istic.tpjpa.domain;
 
-import java.util.LinkedList;
+import java.awt.List;
+import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
-import antlr.collections.List;
 
 
 @Entity
@@ -18,17 +19,16 @@ public class Home {
 	
 	private String adresse;
 	private double superficie;
-	private double adresse_ip;
+	private String adresse_ip;
+	private List<Heater> heaters = new ArrayList<Heater>();
 	private Person person;
-	
-	//private List persons= (List) new Person();
-	
 	
 	public Home(){
 		
 	}
 	
-	public Home(String adresse,double superficie,double adresse_ip){
+	
+	public Home(String adresse,double superficie,String adresse_ip){
 		this.adresse=adresse;
 		this.superficie=superficie;
 		this.adresse_ip=adresse_ip;
@@ -55,13 +55,13 @@ public class Home {
 	public void setSuperficie(double superficie) {
 		this.superficie = superficie;
 	}
-	public double getAdresse_ip() {
+	public String getAdresse_ip() {
 		return adresse_ip;
 	}
-	public void setAdresse_ip(double adresse_ip) {
+	public void setAdresse_ip(String adresse_ip) {
 		this.adresse_ip = adresse_ip;
 	}
-	@ManyToOne
+	@OneToOne
 	public Person getPerson(){
 		return  person;
 		
@@ -69,6 +69,9 @@ public class Home {
 	public void setPerson(Person person){
 		this.person=person;
 	}
+	
+
+	
 	 @Override
 	public String toString(){
 		return "Home[id="+id+",adresse="+adresse+",superficie"+superficie+",superficie"+superficie+"]";

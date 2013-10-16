@@ -3,29 +3,34 @@ package fr.istic.tpjpa.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+
+import javax.persistence.OneToOne;
 
 
-//@Entity
+@Entity
 public class ElectronicDevice {
 	
 	private Long id;
 	
 	private String name;
-	private Long capacite;
-	
-	private Home home;
+	private String capacite;
+	private String date_fabrication;
+	private Person person;
 	
 	public ElectronicDevice(){
 		
 	}
-	public ElectronicDevice(Long id,String name,Long capacite,Home home ){
+	public ElectronicDevice(String name,String capacite,String date_fabrication){
 		
-		this.id=id;
 		this.name=name;
 		this.capacite=capacite;
-		this.home=home;
+		this.date_fabrication=date_fabrication;
+	}
+		public String getDate_fabrication() {
+		return date_fabrication;
+	}
+	public void setDate_fabrication(String date_fabrication) {
+		this.date_fabrication = date_fabrication;
 	}
 		@Id
 		@GeneratedValue
@@ -41,24 +46,25 @@ public class ElectronicDevice {
 		public void setName(String name) {
 		this.name = name;
 	}
-		public Long getCapacite() {
+		public String getCapacite() {
 		return capacite;
 	}
-		public void setCapacite(Long capacite) {
+		public void setCapacite(String capacite) {
 		this.capacite = capacite;
 	}
+		@OneToOne
+		public Person getPerson() {
+			return person;
+		}
+		public void setPerson(Person person) {
+			this.person = person;
+		}
 		
-		@Id
-		@GeneratedValue	
-		public Home getHome() {
-		return home;
-	}
-		public void setHome(Home home) {
-		this.home = home;
-	}
+		@Override
+		public String toString(){
+			return "Home[id="+id+",name="+name+",capacite="+capacite+",date fabrication="+date_fabrication+"]";
+		}
 		
-	
-	
 	
 
 }

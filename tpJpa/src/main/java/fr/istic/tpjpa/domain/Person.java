@@ -1,10 +1,10 @@
 package fr.istic.tpjpa.domain;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToMany;
 
 import java.util.ArrayList;
@@ -19,9 +19,10 @@ public class Person {
 	private String genre;
 	private String mail;
 	private List<Home> homes = new ArrayList<Home>();
-
 	private double datenaissance;
 	private String profile_facebook;
+	private List<ElectronicDevice> electronics = new ArrayList<ElectronicDevice>();
+	
 
 	public Person() {
 
@@ -94,6 +95,15 @@ public class Person {
 
 	public void setHomes( List<Home> homes) {
 		this.homes = homes;
+	}
+	
+	@OneToMany
+	public List<ElectronicDevice> getElectronics() {
+		return electronics;
+	}
+
+	public void setElectronics( List<ElectronicDevice> electronics) {
+		this.electronics=electronics;
 	}
 
 	@Override
