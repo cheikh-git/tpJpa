@@ -8,6 +8,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.From;
+import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.EntityType;
 
 import fr.istic.tpjpa.domain.ElectronicDevice;
 import fr.istic.tpjpa.domain.Friend;
@@ -35,6 +40,23 @@ public class JpaTest {
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
 
+		
+		CriteriaBuilder cb=factory.getCriteriaBuilder();
+		
+		CriteriaQuery<Person> p=cb.createQuery(Person.class);
+		Root<Person> person=p.from(Person.class);
+		p.select(person);
+		
+		CriteriaQuery<Home> h=cb.createQuery(Home.class);
+		Root<Home> home=h.from(Home.class);
+		h.select(home);
+		
+		CriteriaQuery<ElectronicDevice> e=cb.createQuery(ElectronicDevice.class);
+		Root<ElectronicDevice> elec=e.from(ElectronicDevice.class);
+		e.select(elec);
+		
+		
+		
 		// TODO create entity
 
 		Person p1 = new Person("thiam", "cheikh", "M", "cheikh@gmail.com", 0603,"elkheucha");
