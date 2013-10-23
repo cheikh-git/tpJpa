@@ -10,6 +10,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import fr.istic.tpjpa.domain.ElectronicDevice;
+import fr.istic.tpjpa.domain.Friend;
 import fr.istic.tpjpa.domain.Heater;
 import fr.istic.tpjpa.domain.Home;
 import fr.istic.tpjpa.domain.Person;
@@ -29,7 +30,7 @@ public class JpaTest {
 		EntityManagerFactory factory = Persistence
 				.createEntityManagerFactory("example");
 		EntityManager manager = factory.createEntityManager();
-		JpaTest test = new JpaTest(manager);
+		//JpaTest test = new JpaTest(manager);
 
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
@@ -62,6 +63,12 @@ public class JpaTest {
 		Heater he3=new Heater(20000,"04-10.2004","sony");
 		Heater he4=new Heater(15680,"05-07-1999","filis");
 		
+		Friend f1=new Friend("pape","pape05");
+		Friend f2=new Friend("sall","sall04");
+		Friend f3=new Friend("rafaella","raff52");
+		Friend f4=new Friend("philemon","philemon41");
+		Friend f5=new Friend("fatou","fatou41");
+		
 		p1.setHomes(new ArrayList<Home>(Arrays.asList(h1)));
 		p2.setHomes(new ArrayList<Home>(Arrays.asList(h2, h3)));
 		p3.setHomes(new ArrayList<Home>(Arrays.asList(h4,h5)));
@@ -72,7 +79,10 @@ public class JpaTest {
 		p3.setElectronics(new ArrayList<ElectronicDevice>(Arrays.asList(e3)));
 		p3.setElectronics(new ArrayList<ElectronicDevice>(Arrays.asList(e4)));
 		
-		h1.setHeaters(new List<Heater>(Arrays.asList(he1)));
+		h1.setHeater(he1);
+		h2.setHeater(he2);
+		h3.setHeater(he3);
+		h4.setHeater(he4);
 		
 		h1.setPerson(p1);
 		h2.setPerson(p2);
@@ -86,7 +96,24 @@ public class JpaTest {
 		e2.setPerson(p1);
 		e3.setPerson(p3);
 		e4.setPerson(p3);
-
+		
+		he1.setHome(h1);
+		he2.setHome(h2);
+		he3.setHome(h3);
+		he4.setHome(h4);
+		
+		p1.setFriends(new ArrayList<Friend>(Arrays.asList(f1)));
+		p1.setFriends(new ArrayList<Friend>(Arrays.asList(f2)));
+		p2.setFriends(new ArrayList<Friend>(Arrays.asList(f3)));
+		p3.setFriends(new ArrayList<Friend>(Arrays.asList(f4)));
+		p3.setFriends(new ArrayList<Friend>(Arrays.asList(f5)));
+		
+		f1.setPerson(p1);
+		f2.setPerson(p1);
+		f3.setPerson(p2);
+		f4.setPerson(p3);
+		f5.setPerson(p3);
+		
 		manager.persist(p1);
 		manager.persist(p2);
 		manager.persist(p3);
@@ -104,6 +131,17 @@ public class JpaTest {
 		manager.persist(e2);
 		manager.persist(e3);
 		manager.persist(e4);
+		
+		manager.persist(he1);
+		manager.persist(he2);
+		manager.persist(he3);
+		manager.persist(he4);
+		
+		manager.persist(f1);
+		manager.persist(f2);
+		manager.persist(f3);
+		manager.persist(f4);
+		manager.persist(f5);
 
 		// TODO persist entity
 
@@ -115,5 +153,17 @@ public class JpaTest {
 
 		manager.close();
 	}
+	
+	/*private void listPerson(){
 
-}
+        List<Person> resultList = manager.createQuery("Select a From Person a", Person.class).getResultList();
+
+        System.out.println("num of person:"+resultList.size());
+
+        for(Person next:resultList){
+
+            System.out.println("next person:"+next);
+
+        }
+	}*/
+	}

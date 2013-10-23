@@ -1,11 +1,12 @@
 package fr.istic.tpjpa.domain;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
 import javax.persistence.OneToMany;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,6 @@ import java.util.List;
 @Entity
 public class Person {
 	private Long id;
-
 	private String name;
 	private String firstname;
 	private String genre;
@@ -22,6 +22,7 @@ public class Person {
 	private double datenaissance;
 	private String profile_facebook;
 	private List<ElectronicDevice> electronics = new ArrayList<ElectronicDevice>();
+	private List<Friend> friends=new ArrayList<Friend>();
 	
 
 	public Person() {
@@ -36,6 +37,7 @@ public class Person {
 		this.mail = mail;
 		this.datenaissance = datenaissance;
 		this.profile_facebook = profile_facebook;
+		//this.homes=(List<Home>) homes;
 	}
 
 	@Id
@@ -86,9 +88,9 @@ public class Person {
 
 	public void setProfile_facebook(String profile_facebook) {
 		this.profile_facebook = profile_facebook;
-	}
+	} 
 
-	@OneToMany
+	@OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST)
 	public List<Home> getHomes() {
 		return homes;
 	}
@@ -97,13 +99,29 @@ public class Person {
 		this.homes = homes;
 	}
 	
-	@OneToMany
+	@OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST)
 	public List<ElectronicDevice> getElectronics() {
 		return electronics;
 	}
 
 	public void setElectronics( List<ElectronicDevice> electronics) {
 		this.electronics=electronics;
+	}
+	
+	public double getDatenaissance() {
+		return datenaissance;
+	}
+
+	public void setDatenaissance(double datenaissance) {
+		this.datenaissance = datenaissance;
+	}
+	@OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST)
+	public List<Friend> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(List<Friend> friends) {
+		this.friends = friends;
 	}
 
 	@Override

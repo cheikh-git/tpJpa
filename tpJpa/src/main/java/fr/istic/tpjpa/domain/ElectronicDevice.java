@@ -3,7 +3,7 @@ package fr.istic.tpjpa.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 
@@ -52,7 +52,7 @@ public class ElectronicDevice {
 		public void setCapacite(String capacite) {
 		this.capacite = capacite;
 	}
-		@OneToOne
+		@ManyToOne
 		public Person getPerson() {
 			return person;
 		}
